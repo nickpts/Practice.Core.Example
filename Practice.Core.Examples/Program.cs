@@ -44,7 +44,9 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-            BasicThreading.BasicTheadTest();
+            BasicThreading.WaitExample();
+            // BasicThreading.CPUandIOBoundOperationsTest();
+            // BasicThreading.BasicTheadTest();
             // Concurrency.Asynchrony.TaskWithSimpleCancellation();
             // Asynchrony.TryWithTimeout();
             // Asynchrony.TaskCombinationsSyncInt();

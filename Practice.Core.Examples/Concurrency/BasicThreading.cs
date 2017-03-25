@@ -16,10 +16,61 @@ namespace Practice.Core.Examples.Concurrency
     {
         public const string largeFileUri = @"C:\Users\Nick\Dev\docs\asyncioexample.txt";
         public const string shortFileUri = "";
+        private static ManualResetEvent eve = new ManualResetEvent(false);
 
+        private static Thread longCpuBoundThread = new Thread(IterateOverEnormousNumberSet);
+        private static Thread shortCpuBoundThread = new Thread(IterateOverEnormousNumberSet);
+        private static Thread longCpuBoundThreadWithHandle = new Thread(IterateOverEnormousNumberSetWithWait);
+        
+        public void ThreadPoolStuff()
+        {
+            string testValue = string.Empty;
+            ThreadPool.QueueUserWorkItem(new WaitCallback(a => GenericTestMethod("test")));
+        }
+
+
+        public static void WaitExample()
+        {
+            longCpuBoundThreadWithHandle.Start();
+            //pressing enter should reset the thread.
+            Console.ReadLine();
+            eve.Set();
+        }
+        
+        public static void CPUandIOBoundOperationsTest()
+        {
+            List<string> longfileInput = new List<string>();
+            List<string> shortFileInput = new List<string>();
+
+            Thread longIoBoundThread = new Thread(() =>
+            {
+                longfileInput = ReadFile(@"C:\Users\Nick\Dev\docs\asyncioexample.txt");
+            });
+
+            Thread shortIoBoundThread = new Thread(() =>
+            {
+                shortFileInput = ReadFile(@"C:\Users\Nick\Dev\docs\asyncioexample2.txt");
+            });
+
+            longCpuBoundThread.Start();
+            shortCpuBoundThread.Start();
+            longIoBoundThread.Start();
+            shortIoBoundThread.Start();
+
+            // block the main thread
+            // switching to task manager should show activity across all cores
+            Thread.Sleep(10000);
+
+            int count = longfileInput.Count();
+            int tCount = shortFileInput.Count();
+
+        }
+        /// <summary>
+        /// Read two files from the disk at the same time
+        /// </summary>
         public static void BasicTheadTest()
         {
-            List<string> longfileInput = ReadFile(largeFileUri);
+            List<string> longfileInput = new List<string>();
             List<string> shortFileInput = new List<string>();
 
             Thread longActionThread = new Thread(() =>
@@ -35,13 +86,12 @@ namespace Practice.Core.Examples.Concurrency
             longActionThread.Start();
             shortActionThread.Start();
 
-            longActionThread.Join();
-            shortActionThread.Join();
-            Console.WriteLine("jimmy!");
+            // block the main thread
+            // by the time control is returned both threads will have returned
+            Thread.Sleep(10000);
 
             int count = longfileInput.Count();
             int tCount = shortFileInput.Count();
-            Console.WriteLine("johnny!");
         }
 
         public static void TestThreadParameters()
@@ -78,6 +128,40 @@ namespace Practice.Core.Examples.Concurrency
             }
 
             return lines;
+        }
+        
+        public static void IterateOverEnormousNumberSet()
+        {
+            for(double d = 0; d < 100000; d++)
+            {
+                // just loop over aimlessly
+            }
+        }
+
+        public static void IterateOverReasonablySmallNumberSet()
+        {
+            for (int i = 0; i < 500000; i++)
+            {
+                // just loop over aimlessly
+            }
+        }
+
+        public static void IterateOverEnormousNumberSetWithWait()
+        {
+            for (double d = 0; d < 100000; d++)
+            {
+                Console.WriteLine(d);
+
+                if (d == 50000)
+                {
+                    eve.WaitOne();
+                }
+            }
+        }
+
+        public void GenericTestMethod(string testValue)
+        {
+
         }
     }
 }
