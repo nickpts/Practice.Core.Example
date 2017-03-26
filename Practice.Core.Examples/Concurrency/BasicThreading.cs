@@ -116,7 +116,7 @@ namespace Practice.Core.Examples.Concurrency
 
         public static List<string> ReadFile(string fileUri)
         {
-            List<string> lines = new List<string>(); 
+            List<string> lines = new List<string>(); https://go.microsoft.com/fwlink/p/?LinkId=248256
 
             using (StreamReader reader = File.OpenText(fileUri))
             {

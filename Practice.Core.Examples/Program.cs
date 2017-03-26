@@ -44,7 +44,10 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-            BasicThreading.WaitExample();
+            AdvancedThreading.SemaphoreSixThreads();
+            // AdvancedThreading.DeadlockExample();
+            // AdvancedThreading.UseMutexToSynchronizeAccess();
+            // BasicThreading.WaitExample();
             // BasicThreading.CPUandIOBoundOperationsTest();
             // BasicThreading.BasicTheadTest();
             // Concurrency.Asynchrony.TaskWithSimpleCancellation();
@@ -57,7 +60,7 @@ namespace Practice.Core.Examples
             // SomeNetworkingStuff.CookieWork();
             // Xml.Write();
 
-            Thread.Sleep(10000);
+            Thread.Sleep(100000);
         }
     }
 }
