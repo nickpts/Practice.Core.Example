@@ -44,7 +44,11 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-            AdvancedThreading.SemaphoreSixThreads();
+            AdvancedThreading.ReleaseThreadsWithCountdownEvent();
+            // AdvancedThreading.ReleaseMultipleThreadsWithWaitEventHandle();
+            // AdvancedThreading.ThreadsWaitingOnAutoResetEvent();
+            // AdvancedThreading.ReaderWriterLockSyncAccess();
+            // AdvancedThreading.SemaphoreSixThreads();
             // AdvancedThreading.DeadlockExample();
             // AdvancedThreading.UseMutexToSynchronizeAccess();
             // BasicThreading.WaitExample();
