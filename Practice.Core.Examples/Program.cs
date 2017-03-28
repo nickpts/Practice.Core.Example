@@ -44,7 +44,8 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-            AdvancedThreading.ReleaseThreadsWithCountdownEvent();
+            // AdvancedThreading.BarrierExampleToSynchronizeThreeThreads();
+            // AdvancedThreading.ReleaseThreadsWithCountdownEvent();
             // AdvancedThreading.ReleaseMultipleThreadsWithWaitEventHandle();
             // AdvancedThreading.ThreadsWaitingOnAutoResetEvent();
             // AdvancedThreading.ReaderWriterLockSyncAccess();

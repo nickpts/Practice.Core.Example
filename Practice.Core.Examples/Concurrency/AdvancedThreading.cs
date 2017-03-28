@@ -17,7 +17,35 @@ namespace Practice.Core.Examples.Concurrency
         private static AutoResetEvent autoEvent = new AutoResetEvent(false);
         private static ManualResetEvent manEvent = new ManualResetEvent(false);
         private static CountdownEvent cEvent = new CountdownEvent(3);
-        
+        private static Barrier bar = new Barrier(3, act);
+
+        private static Action<Barrier> act = (Barrier b) =>
+        {
+            Console.WriteLine("Post action");
+            Console.WriteLine($"Phase number: {b.CurrentPhaseNumber}");
+        };
+
+        public static void BarrierExampleToSynchronizeThreeThreads()
+        {         
+            Console.WriteLine($"Current participant count: {bar.ParticipantCount}");
+
+            new Thread(() => { MethodThatDoesSomethingComplicated(1); }).Start();
+            new Thread(() => { MethodThatDoesSomethingComplicated(2); }).Start();
+            new Thread(() => { MethodThatDoesSomethingComplicated(3); }).Start();
+        }
+
+        private static void MethodThatDoesSomethingComplicated(int threadNumber)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write($"{i}");
+                bar.SignalAndWait();
+            }
+
+            //dispose barrier - important!
+            bar.Dispose();
+        }
+
         public static void ReleaseThreadsWithCountdownEvent()
         {
             Thread firstThreadTobeNotified = new Thread(() =>
