@@ -5,8 +5,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Practice.Core.Examples.Abstractions;
+using System.Diagnostics;
+
 namespace Practice.Core.Examples.Concurrency
-{     
+{
     public class AdvancedThreading
     {
         private static Mutex synchronizationMutex = new Mutex();
@@ -18,6 +21,70 @@ namespace Practice.Core.Examples.Concurrency
         private static ManualResetEvent manEvent = new ManualResetEvent(false);
         private static CountdownEvent cEvent = new CountdownEvent(3);
         private static Barrier bar = new Barrier(3, act);
+        private ThreadLocal<List<int>> randomNumList = new ThreadLocal<List<int>>();
+        private ThreadLocal<Random> standGen;
+        private static Timer genTimer;
+        private static int counter = 0;
+        private static int maxTimes = 10;
+
+        static AdvancedThreading()
+        {
+
+        }
+
+        public static void StartGenTimer()
+        {
+            genTimer = new Timer(
+                        MethodThatPrintsOnConsole,
+                        autoEvent,
+                        1000,
+                        250);
+
+            autoEvent.WaitOne();
+            genTimer.Change(0, 500);
+            Console.WriteLine("\nChanging period to .5 seconds.\n");
+
+
+            Console.ReadLine();
+            genTimer.Dispose();
+        }
+
+        public AdvancedThreading()
+        {
+            randomNumList = new ThreadLocal<List<int>>(() => new List<int>());
+
+            standGen = new ThreadLocal<Random>(() => new Random());
+        }
+
+        public void TryPopulateList()
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+            List<int> randomNumberList = new List<int>();
+
+            for (int i = 0; i < 2000; i++)
+            {
+                new Thread(() =>
+                {
+                    int random = standGen.Value.Next();
+                    randomNumberList.Add(random);
+
+                }).Start();
+
+                new Thread(() =>
+                {
+                    int random = standGen.Value.Next();
+                    randomNumberList.Add(random);
+
+                }).Start();
+
+            }
+
+            var duration = watch.Elapsed.Seconds;
+            int duplicates = randomNumberList.Distinct().Count();
+
+            Console.WriteLine($"Operation took { duration } seconds");
+        }
 
         private static Action<Barrier> act = (Barrier b) =>
         {
@@ -26,7 +93,7 @@ namespace Practice.Core.Examples.Concurrency
         };
 
         public static void BarrierExampleToSynchronizeThreeThreads()
-        {         
+        {
             Console.WriteLine($"Current participant count: {bar.ParticipantCount}");
 
             new Thread(() => { MethodThatDoesSomethingComplicated(1); }).Start();
@@ -70,7 +137,7 @@ namespace Practice.Core.Examples.Concurrency
             thirdThreadTobeNotified.Start();
             cEvent.Wait();
             Console.WriteLine("Countdown event has been triggered");
-            
+
         }
 
         public static void ReleaseMultipleThreadsWithWaitEventHandle()
@@ -94,7 +161,7 @@ namespace Practice.Core.Examples.Concurrency
 
         public static void ThreadsWaitingOnAutoResetEvent()
         {
-            Thread firstThreadTobeNotified = new Thread(() => 
+            Thread firstThreadTobeNotified = new Thread(() =>
             {
                 MethodWithAutoResetEventToBeNotified();
             });
@@ -122,7 +189,7 @@ namespace Practice.Core.Examples.Concurrency
             for (int i = 1; i <= 10; i++)
             {
                 object hashCode = 0;
-                var readerthread = new Thread(() => 
+                var readerthread = new Thread(() =>
                 {
                     hashCode = ReadGenHashcode(i);
                 });
@@ -140,10 +207,10 @@ namespace Practice.Core.Examples.Concurrency
                 Console.WriteLine($"Random number is: {randomNumber}");
             }
         }
-        
+
         public static void UseMutexToSynchronizeAccess()
         {
-            for(int i = 0; i < 2; i++)
+            for (int i = 0; i < 2; i++)
             {
                 var newThread = new Thread(UseResource);
                 newThread.Name = "thread" + i;
@@ -155,7 +222,7 @@ namespace Practice.Core.Examples.Concurrency
             synchronizationMutex.Dispose();
             // needs to be released otherwise an exception
             // will be thrown if WaitOne is called
-            synchronizationMutex.ReleaseMutex(); 
+            synchronizationMutex.ReleaseMutex();
         }
 
         /// <summary>
@@ -202,7 +269,7 @@ namespace Practice.Core.Examples.Concurrency
 
             var secondThread = new Thread(() =>
             {
-                lock(objectToLock)
+                lock (objectToLock)
                 {
                     Console.WriteLine("object locked by second thread!");
 
@@ -225,7 +292,7 @@ namespace Practice.Core.Examples.Concurrency
         {
             semPool = new Semaphore(0, 3);
 
-            for(int i = 1; i <= 6; i++)
+            for (int i = 1; i <= 6; i++)
             {
                 var thread = new Thread(() =>
                 {
@@ -253,7 +320,7 @@ namespace Practice.Core.Examples.Concurrency
             Console.WriteLine("Thread {0} releases the semaphore.", num);
             Console.WriteLine("Thread {0} previous semaphore count: {1}", num, semPool.Release());
         }
-    
+
         private static int ReadGenHashcode(int threadNumber)
         {
             rwLock.TryEnterReadLock(500);
@@ -272,7 +339,7 @@ namespace Practice.Core.Examples.Concurrency
             int result = randGen.Next();
             Console.WriteLine($"Thread {threadName} is modifying the state of the resource");
             rwLock.ExitWriteLock();
-            
+
             Thread.Sleep(500);
             return result;
         }
@@ -299,6 +366,18 @@ namespace Practice.Core.Examples.Concurrency
             Console.WriteLine("Entered method with event");
             cEvent.Signal();
             Console.WriteLine("Received signal from countdown event");
+        }
+
+        private static void MethodThatPrintsOnConsole(object state)
+        {
+            Console.WriteLine("Called method has ran");
+            counter++;
+
+            if (counter > maxTimes)
+            {
+                autoEvent.Set();
+                counter = 0;
+            }
         }
 
         #endregion

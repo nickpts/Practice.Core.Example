@@ -44,6 +44,10 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
+            var exampleObject = new AdvancedThreading();
+
+            AdvancedThreading.StartGenTimer();
+            //exampleObject.TryPopulateList();
             // AdvancedThreading.BarrierExampleToSynchronizeThreeThreads();
             // AdvancedThreading.ReleaseThreadsWithCountdownEvent();
             // AdvancedThreading.ReleaseMultipleThreadsWithWaitEventHandle();
@@ -64,6 +68,7 @@ namespace Practice.Core.Examples
             // Serialization.Test();
             // SomeNetworkingStuff.CookieWork();
             // Xml.Write();
+
 
             Thread.Sleep(100000);
         }
