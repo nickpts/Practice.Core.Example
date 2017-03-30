@@ -6,13 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace Practice.Core.Examples.Concurrency
 {
     public class CParallel
     {
         //massive file with 1,500,000 words
-        private static readonly string filePath = @"C:\Users\Nick\Dev\docs\asyncioexample.txt";
+        private static readonly string millionLineFilePath = @"C:\Users\Nick\Dev\docs\asyncioexample.txt";
+        private static readonly string halfMillionLineFilePath = @"C:\Users\user\Downloads\test.txt";
 
         public static void ParallelPrimeNumbers()
         {
@@ -42,7 +44,7 @@ namespace Practice.Core.Examples.Concurrency
         public static List<string> FindWordsParallel()
         {
             HashSet<string> hashWords = new HashSet<string>(
-                File.ReadAllLines(filePath),
+                File.ReadAllLines(millionLineFilePath),
                 StringComparer.InvariantCultureIgnoreCase);
 
             List<string> megaSet = hashWords.ToList();
@@ -92,6 +94,67 @@ namespace Practice.Core.Examples.Concurrency
             Thread.Sleep(1000);
             //main thread will cancel worker thread operation
             source.Cancel();
+        }
+
+        public static void ParallelPrimeNumberInvokation()
+        {
+            Action firstSet = () => { CalculatePrimerNumbers(3, 10000000, 1); };
+            Action secondSet = () => { CalculatePrimerNumbers(10000003, 10000000 / 2, 2); };
+            Action thirdSet = () => { CalculatePrimerNumbers(20000006, 10000000 / 3, 3); };
+
+            Parallel.Invoke(firstSet, secondSet, thirdSet);
+
+        }
+
+        public static void CalculatePrimerNumbers(int start, int count, int actionNumber)
+        {
+            var watch = Stopwatch.StartNew();
+
+            IEnumerable<int> numbers = Enumerable.Range(start, count - 3);
+
+            var parallelQuery = from n in numbers
+                                where Enumerable.Range(2, (int)Math.Sqrt(n)).All(i => n % i > 0)
+                                select n;
+
+            Console.WriteLine($"Action: { actionNumber } is starting");
+            parallelQuery.ToArray();
+            Console.WriteLine($"Action: { actionNumber } finished in { watch.ElapsedMilliseconds } milliSeconds");
+        }
+
+        public static void ParallelKeyGeneration()
+        {
+            var watch = Stopwatch.StartNew();
+
+            var newKeyPairs = new string[6];
+            Parallel.For(1, newKeyPairs.Length, (i, loopstate) => 
+            {
+                newKeyPairs[i] = RSA.Create().ToXmlString(true);
+                Console.WriteLine($"Generating key pair: {i} ");
+
+                if (i == 5)
+                {
+                    // will break out of the loop
+                    // loopstate.Break(); 
+                }
+
+            });
+
+            Console.WriteLine($"Operation finished in { watch.ElapsedMilliseconds } milliSeconds");
+
+            watch.Reset();
+            watch.Start();
+
+            var keyPairs = new string[6];
+            for (int i = 0; i <= 5; i++)
+            {
+                keyPairs[i] = RSA.Create().ToXmlString(true);
+            }
+
+            // same thing can be done with parallel linq
+            // string[] keyPairs = ParallelEnumerable.Range(0, 6).Select(i => RSA.Create().ToXmlString(true)).ToArray();
+
+            //parallel foreach is much more efficient
+            Console.WriteLine($"Operation finished in { watch.ElapsedMilliseconds } milliSeconds");
         }
     }
 }

@@ -44,7 +44,9 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-            CParallel.ParallelPrimeNumbersWithCancellation();
+            CParallel.ParallelKeyGeneration();
+            //CParallel.ParallelPrimeNumberInvokation();
+            //CParallel.ParallelPrimeNumbersWithCancellation();
             //CParallel.FindWordsParallel();
             //CParallel.ParallelPrimeNumbers();
             // AdvancedThreading.BarrierExampleToSynchronizeThreeThreads();
@@ -68,7 +70,7 @@ namespace Practice.Core.Examples
             // SomeNetworkingStuff.CookieWork();
             // Xml.Write();
 
-            Thread.Sleep(100000);
+            Console.ReadLine();
         }
     }
 }
