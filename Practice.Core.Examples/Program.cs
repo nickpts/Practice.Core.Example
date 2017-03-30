@@ -44,11 +44,14 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-            CParallel.ParallelKeyGeneration();
-            //CParallel.ParallelPrimeNumberInvokation();
-            //CParallel.ParallelPrimeNumbersWithCancellation();
-            //CParallel.FindWordsParallel();
-            //CParallel.ParallelPrimeNumbers();
+            string s = CParallel.TaskCombinedString();
+            //CParallel.TaskWithChild();
+            // CParallel.TaskFactoryAsyncStateExample();
+            // CParallel.ParallelKeyGeneration();
+            // CParallel.ParallelPrimeNumberInvokation();
+            // CParallel.ParallelPrimeNumbersWithCancellation();
+            // CParallel.FindWordsParallel();
+            // CParallel.ParallelPrimeNumbers();
             // AdvancedThreading.BarrierExampleToSynchronizeThreeThreads();
             // AdvancedThreading.ReleaseThreadsWithCountdownEvent();
             // AdvancedThreading.ReleaseMultipleThreadsWithWaitEventHandle();
@@ -96,14 +99,6 @@ namespace Practice.Core.Examples
 //        }
 //    }
 //}
-
-
-#endregion
-
-#region comparers
-
-
-
 
 
 #endregion

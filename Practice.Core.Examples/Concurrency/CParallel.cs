@@ -15,6 +15,7 @@ namespace Practice.Core.Examples.Concurrency
         //massive file with 1,500,000 words
         private static readonly string millionLineFilePath = @"C:\Users\Nick\Dev\docs\asyncioexample.txt";
         private static readonly string halfMillionLineFilePath = @"C:\Users\user\Downloads\test.txt";
+        private static readonly string smallerFilePath = @"C:\Users\Nick\Dev\docs\asyncioexample2.txt";
 
         public static void ParallelPrimeNumbers()
         {
@@ -155,6 +156,51 @@ namespace Practice.Core.Examples.Concurrency
 
             //parallel foreach is much more efficient
             Console.WriteLine($"Operation finished in { watch.ElapsedMilliseconds } milliSeconds");
+        }
+
+        public static void TaskFactoryAsyncStateExample()
+        {   
+            Action<object> act = (o) => { };
+
+            // initial state object will be passed to the delegate
+            var t = Task.Factory.StartNew(act, "test state object");
+            Console.WriteLine(t.AsyncState);
+        }
+
+        public static void TaskWithChild()
+        {
+            Action act = () => 
+            {
+                var watch = Stopwatch.StartNew();
+
+                Console.WriteLine("Working on main task");
+                List<string> allLines = File.ReadAllLines(smallerFilePath).ToList();
+                Console.WriteLine($"Completed main task in { watch.ElapsedMilliseconds } milliseconds");
+
+                Console.WriteLine("Working on child task");
+                watch.Reset();
+                watch.Start();
+
+                var cTask = Task.Factory.StartNew(() => 
+                {
+                    List<string> fullText = File.ReadAllLines(millionLineFilePath).ToList();
+                }, TaskCreationOptions.AttachedToParent);
+
+                Console.WriteLine($"Completed child task in { watch.ElapsedMilliseconds } milliseconds");
+            };
+
+            var pTask = Task.Factory.StartNew(act);   
+        }
+
+        public static string TaskCombinedString()
+        {
+            Func<string> randomTrans = () => { return "Entered task, "; };
+
+            Task<string> stringTransformationTask = Task.Factory.StartNew(randomTrans)
+                .ContinueWith((s) => { return s.Result + "modified by continuation task 1, "; })
+                .ContinueWith((s) => { return s.Result + "modified by continuation task 2"; });
+
+            return stringTransformationTask.Result.ToString();
         }
     }
 }
