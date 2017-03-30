@@ -44,6 +44,9 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
+            CParallel.ParallelPrimeNumbersWithCancellation();
+            //CParallel.FindWordsParallel();
+            //CParallel.ParallelPrimeNumbers();
             // AdvancedThreading.BarrierExampleToSynchronizeThreeThreads();
             // AdvancedThreading.ReleaseThreadsWithCountdownEvent();
             // AdvancedThreading.ReleaseMultipleThreadsWithWaitEventHandle();
