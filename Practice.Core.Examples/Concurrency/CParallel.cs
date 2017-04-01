@@ -127,7 +127,7 @@ namespace Practice.Core.Examples.Concurrency
             var watch = Stopwatch.StartNew();
 
             var newKeyPairs = new string[6];
-            Parallel.For(1, newKeyPairs.Length, (i, loopstate) => 
+            Parallel.For(1, newKeyPairs.Length, (i, loopstate) =>
             {
                 newKeyPairs[i] = RSA.Create().ToXmlString(true);
                 Console.WriteLine($"Generating key pair: {i} ");
@@ -159,7 +159,7 @@ namespace Practice.Core.Examples.Concurrency
         }
 
         public static void TaskFactoryAsyncStateExample()
-        {   
+        {
             Action<object> act = (o) => { };
 
             // initial state object will be passed to the delegate
@@ -169,7 +169,7 @@ namespace Practice.Core.Examples.Concurrency
 
         public static void TaskWithChild()
         {
-            Action act = () => 
+            Action act = () =>
             {
                 var watch = Stopwatch.StartNew();
 
@@ -181,7 +181,7 @@ namespace Practice.Core.Examples.Concurrency
                 watch.Reset();
                 watch.Start();
 
-                var cTask = Task.Factory.StartNew(() => 
+                var cTask = Task.Factory.StartNew(() =>
                 {
                     List<string> fullText = File.ReadAllLines(millionLineFilePath).ToList();
                 }, TaskCreationOptions.AttachedToParent);
@@ -189,7 +189,7 @@ namespace Practice.Core.Examples.Concurrency
                 Console.WriteLine($"Completed child task in { watch.ElapsedMilliseconds } milliseconds");
             };
 
-            var pTask = Task.Factory.StartNew(act);   
+            var pTask = Task.Factory.StartNew(act);
         }
 
         public static string TaskCombinedString()
@@ -201,6 +201,32 @@ namespace Practice.Core.Examples.Concurrency
                 .ContinueWith((s) => { return s.Result + "modified by continuation task 2"; });
 
             return stringTransformationTask.Result.ToString();
+        }
+
+        public static void GetExceptionsFromChildTasks()
+        {
+            var options = TaskCreationOptions.AttachedToParent;
+
+
+            Task randomTask = Task.Factory.StartNew(() =>
+            {
+
+                Task.Factory.StartNew(() => { throw new InvalidOperationException(); }, options)
+                .ContinueWith(p => { throw new FieldAccessException(); }, TaskContinuationOptions.AttachedToParent);
+
+                Task.Factory.StartNew(() => { throw new NullReferenceException(); }, options);
+                Task.Factory.StartNew(() => { throw new InvalidCastException(); }, options);
+
+            }).ContinueWith(p => 
+            {
+                var ex = p.Exception.Flatten(); // will return 4 exceptions
+                //p.Exception.Handle()
+                
+
+
+            }, TaskContinuationOptions.OnlyOnFaulted);
+
+            randomTask.Wait();
         }
     }
 }

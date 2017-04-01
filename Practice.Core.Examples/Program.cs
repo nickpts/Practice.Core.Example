@@ -44,7 +44,11 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-            string s = CParallel.TaskCombinedString();
+            
+            
+            CParallel.GetExceptionsFromChildTasks();
+            
+            // string s = CParallel.TaskCombinedString();
             //CParallel.TaskWithChild();
             // CParallel.TaskFactoryAsyncStateExample();
             // CParallel.ParallelKeyGeneration();
