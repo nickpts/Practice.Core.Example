@@ -207,7 +207,6 @@ namespace Practice.Core.Examples.Concurrency
         {
             var options = TaskCreationOptions.AttachedToParent;
 
-
             Task randomTask = Task.Factory.StartNew(() =>
             {
 
@@ -220,9 +219,15 @@ namespace Practice.Core.Examples.Concurrency
             }).ContinueWith(p => 
             {
                 var ex = p.Exception.Flatten(); // will return 4 exceptions
-                //p.Exception.Handle()
-                
 
+                p.Exception.Flatten().Handle(aex =>
+                {
+                    if (aex is FieldAccessException)
+                    {
+                        return true; // this exception is handled
+                    }
+                    else return false; // should rethrow three other exceptions
+                 });
 
             }, TaskContinuationOptions.OnlyOnFaulted);
 

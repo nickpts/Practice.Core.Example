@@ -108,6 +108,7 @@
     <Compile Include="Abstractions\Wish.cs" />
     <Compile Include="Abstractions\XCustomer.cs" />
     <Compile Include="AssemblyExamples.cs" />
+    <Compile Include="Collections\Concurrent.cs" />
     <Compile Include="Comparers\EqualityComparer.cs" />
     <Compile Include="Comparers\FirstLastEqComparer.cs" />
     <Compile Include="Comparers\PriorityComparer.cs" />

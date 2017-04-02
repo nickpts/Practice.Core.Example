@@ -20,6 +20,7 @@ using System.Net;
 using System.Net.Http;
 using Practice.Core.Examples.Comparers;
 using Practice.Core.Examples.Concurrency;
+using Practice.Core.Examples.Collections;
 
 namespace Practice.Core.Examples
 {
@@ -44,10 +45,10 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-            
-            
-            CParallel.GetExceptionsFromChildTasks();
-            
+
+            Concurrent.ConcurrentDictionaryPerformance();
+            Concurrent.StandardDictionaryPerformance();
+            //CParallel.GetExceptionsFromChildTasks();
             // string s = CParallel.TaskCombinedString();
             //CParallel.TaskWithChild();
             // CParallel.TaskFactoryAsyncStateExample();
