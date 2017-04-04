@@ -16,8 +16,7 @@ namespace Practice.Core.Examples.Collections
         {
             var cd = new ConcurrentDictionary<int, int>();
 
-            var watch = new Stopwatch();
-            watch.Start();
+            var watch = Stopwatch.StartNew();
             for (int i = 0; i < 1000000; i++)
             {
                 cd[i] = 123;
@@ -31,7 +30,7 @@ namespace Practice.Core.Examples.Collections
         {
             var d = new Dictionary<int, int>();
 
-            var watch = new Stopwatch();
+            var watch = Stopwatch.StartNew();
             watch.Start();
             for (int i = 0; i < 1000000; i++)
             {
@@ -44,12 +43,17 @@ namespace Practice.Core.Examples.Collections
             int duration = watch.Elapsed.Milliseconds;
             Console.WriteLine(duration);
         }
-        public static void Placeholder()
+
+        public static void ParallelAddingToConcurrentBag()
         {
             var t = new ConcurrentBag<int>();
-            
+
+            Action actAdd = () => { t.Add(1); };
+            Action actRemove = () => { var el = t.Where(c => c == 1).FirstOrDefault(); t.TryTake(out el); };
+
+            Parallel.Invoke(actAdd, actAdd, actAdd, actAdd, actRemove, actRemove);
+
+            Console.WriteLine(t.Count());
         }
-
-
     }
 }

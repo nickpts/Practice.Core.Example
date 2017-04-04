@@ -107,6 +107,7 @@
     <Compile Include="Abstractions\Supplier.cs" />
     <Compile Include="Abstractions\Wish.cs" />
     <Compile Include="Abstractions\XCustomer.cs" />
+    <Compile Include="ApplicationDomain.cs" />
     <Compile Include="AssemblyExamples.cs" />
     <Compile Include="Collections\Concurrent.cs" />
     <Compile Include="Comparers\EqualityComparer.cs" />

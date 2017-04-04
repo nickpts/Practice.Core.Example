@@ -45,12 +45,13 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-
-            Concurrent.ConcurrentDictionaryPerformance();
-            Concurrent.StandardDictionaryPerformance();
-            //CParallel.GetExceptionsFromChildTasks();
+            ApplicationDomain.TestDomain();
+            // Concurrent.ParallelAddingToConcurrentBag();
+            // Concurrent.ConcurrentDictionaryPerformance();
+            // Concurrent.StandardDictionaryPerformance();
+            // CParallel.GetExceptionsFromChildTasks();
             // string s = CParallel.TaskCombinedString();
-            //CParallel.TaskWithChild();
+            // CParallel.TaskWithChild();
             // CParallel.TaskFactoryAsyncStateExample();
             // CParallel.ParallelKeyGeneration();
             // CParallel.ParallelPrimeNumberInvokation();
@@ -74,6 +75,7 @@ namespace Practice.Core.Examples
             // Asynchrony.TaskCombinationsAsync();
             // Asynchrony.ReadFileAsyncCancellable();
             // Asynchrony.LoopExampleAsync();
+
             // Serialization.Test();
             // SomeNetworkingStuff.CookieWork();
             // Xml.Write();
