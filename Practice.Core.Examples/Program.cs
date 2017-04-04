@@ -45,7 +45,10 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-            ApplicationDomain.TestDomain();
+            ApplicationDomain.CommunicateWithAnotherDomain();
+            // ApplicationDomain.PassDataBetweenDomains();
+            // ApplicationDomain.MultipleThreadsLogin();
+            // ApplicationDomain.TestDomain();
             // Concurrent.ParallelAddingToConcurrentBag();
             // Concurrent.ConcurrentDictionaryPerformance();
             // Concurrent.StandardDictionaryPerformance();
