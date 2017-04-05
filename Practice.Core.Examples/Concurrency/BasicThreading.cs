@@ -158,5 +158,10 @@ namespace Practice.Core.Examples.Concurrency
                 }
             }
         }
+
+        public static void GenericTestMethod(string text)
+        {
+            // do nothing
+        }
     }
 }

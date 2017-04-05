@@ -105,6 +105,7 @@
     <Compile Include="Abstractions\Customer.cs" />
     <Compile Include="Abstractions\Stock.cs" />
     <Compile Include="Abstractions\Supplier.cs" />
+    <Compile Include="Abstractions\SystemTime.cs" />
     <Compile Include="Abstractions\Wish.cs" />
     <Compile Include="Abstractions\XCustomer.cs" />
     <Compile Include="ApplicationDomain.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Concurrency\CParallel.cs" />
     <Compile Include="Diagnostics.cs" />
     <Compile Include="Features\LangFeatures.cs" />
+    <Compile Include="Interop.cs" />
     <Compile Include="Io.cs" />
     <Compile Include="Networking.cs" />
     <Compile Include="Program.cs" />

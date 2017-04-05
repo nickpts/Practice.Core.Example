@@ -45,6 +45,9 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
+            Interop.DisplaySystemTime();
+            // Interop.DisplayWindowsDirectory();
+            // Interop.DisplayInteropMessageBox();
             // ApplicationDomain.CommunicateWithAnotherDomain();
             // ApplicationDomain.PassDataBetweenDomains();
             // ApplicationDomain.MultipleThreadsLogin();
@@ -83,7 +86,7 @@ namespace Practice.Core.Examples
             // SomeNetworkingStuff.CookieWork();
             // Xml.Write();
 
-            Features.LangFeatures.CSharp6();
+            // Features.LangFeatures.CSharp6();
 
             Console.ReadLine();
         }
