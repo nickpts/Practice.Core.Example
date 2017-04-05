@@ -45,7 +45,7 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-            ApplicationDomain.CommunicateWithAnotherDomain();
+            // ApplicationDomain.CommunicateWithAnotherDomain();
             // ApplicationDomain.PassDataBetweenDomains();
             // ApplicationDomain.MultipleThreadsLogin();
             // ApplicationDomain.TestDomain();
@@ -82,6 +82,8 @@ namespace Practice.Core.Examples
             // Serialization.Test();
             // SomeNetworkingStuff.CookieWork();
             // Xml.Write();
+
+            Features.LangFeatures.CSharp6();
 
             Console.ReadLine();
         }

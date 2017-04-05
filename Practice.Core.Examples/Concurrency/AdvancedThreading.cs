@@ -173,10 +173,12 @@ namespace Practice.Core.Examples.Concurrency
 
             firstThreadTobeNotified.Start();
             secondThreadTobeNotified.Start();
+
             Console.WriteLine("Press key to continue");
             Console.ReadKey();
             autoEvent.Set();
             Thread.Sleep(1000);
+
             Console.WriteLine("Press key to continue");
             Console.ReadKey();
             autoEvent.Set();

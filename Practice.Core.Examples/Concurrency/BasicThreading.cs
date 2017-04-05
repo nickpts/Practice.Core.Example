@@ -28,10 +28,10 @@ namespace Practice.Core.Examples.Concurrency
             ThreadPool.QueueUserWorkItem(new WaitCallback(a => GenericTestMethod("test")));
         }
 
-
         public static void WaitExample()
         {
             longCpuBoundThreadWithHandle.Start();
+
             //pressing enter should reset the thread.
             Console.ReadLine();
             eve.Set();
@@ -157,11 +157,6 @@ namespace Practice.Core.Examples.Concurrency
                     eve.WaitOne();
                 }
             }
-        }
-
-        public void GenericTestMethod(string testValue)
-        {
-
         }
     }
 }

@@ -119,6 +119,7 @@
     <Compile Include="Concurrency\Asynchrony.cs" />
     <Compile Include="Concurrency\CParallel.cs" />
     <Compile Include="Diagnostics.cs" />
+    <Compile Include="Features\LangFeatures.cs" />
     <Compile Include="Io.cs" />
     <Compile Include="Networking.cs" />
     <Compile Include="Program.cs" />
