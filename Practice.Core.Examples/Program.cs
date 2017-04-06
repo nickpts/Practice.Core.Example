@@ -45,9 +45,9 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-            Interop.DisplaySystemTime();
-            // Interop.DisplayWindowsDirectory();
-            // Interop.DisplayInteropMessageBox();
+            // Interop.Core.DisplaySystemTime();
+            // Interop.Core.DisplayWindowsDirectory();
+            // Interop.Core.DisplayInteropMessageBox();
             // ApplicationDomain.CommunicateWithAnotherDomain();
             // ApplicationDomain.PassDataBetweenDomains();
             // ApplicationDomain.MultipleThreadsLogin();

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 namespace Practice.Core.Examples.Abstractions
 {
     [StructLayout(LayoutKind.Sequential)]
-    public class SystemTime
+    public struct SystemTime
     {
         public ushort Year;
         public ushort Month;

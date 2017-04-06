@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practice.Core.Examples", "Practice.Core.Examples\Practice.Core.Examples.csproj", "{BE18F1A0-8571-47F1-BE7B-1F61D59A0CAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practice.Core.SharedMemory", "Practice.Core.SharedMemory\Practice.Core.SharedMemory.csproj", "{8EA68096-26B8-468B-A829-7ECD70AEC830}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BE18F1A0-8571-47F1-BE7B-1F61D59A0CAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE18F1A0-8571-47F1-BE7B-1F61D59A0CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE18F1A0-8571-47F1-BE7B-1F61D59A0CAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EA68096-26B8-468B-A829-7ECD70AEC830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EA68096-26B8-468B-A829-7ECD70AEC830}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA68096-26B8-468B-A829-7ECD70AEC830}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EA68096-26B8-468B-A829-7ECD70AEC830}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
