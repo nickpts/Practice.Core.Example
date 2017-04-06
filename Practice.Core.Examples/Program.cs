@@ -45,7 +45,10 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-            ApplicationDomain.CommunicateWithAnotherDomain();
+            Interop.WindowHandleCallback();
+            // Interop.DisplayWindowsDirectory();
+            // Interop.DisplaySystemTime();
+            // ApplicationDomain.CommunicateWithAnotherDomain();
             // ApplicationDomain.PassDataBetweenDomains();
             // ApplicationDomain.MultipleThreadsLogin();
             // ApplicationDomain.TestDomain();
@@ -85,6 +88,7 @@ namespace Practice.Core.Examples
 
             Console.ReadLine();
         }
+    
     }
 }
 
