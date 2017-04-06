@@ -120,7 +120,8 @@
     <Compile Include="Concurrency\Asynchrony.cs" />
     <Compile Include="Concurrency\CParallel.cs" />
     <Compile Include="Diagnostics.cs" />
-    <Compile Include="Interop\Interop.cs" />
+    <Compile Include="Interop\Core.cs" />
+    <Compile Include="Interop\SharedMemory.cs" />
     <Compile Include="Io.cs" />
     <Compile Include="Networking.cs" />
     <Compile Include="Program.cs" />

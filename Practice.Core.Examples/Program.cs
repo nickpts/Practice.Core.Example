@@ -45,7 +45,7 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-            Interop.WindowHandleCallback();
+            Interop.Core.WindowHandleCallback();
             // Interop.DisplayWindowsDirectory();
             // Interop.DisplaySystemTime();
             // ApplicationDomain.CommunicateWithAnotherDomain();

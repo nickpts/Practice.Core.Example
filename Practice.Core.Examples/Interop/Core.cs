@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 
 using Practice.Core.Examples.Abstractions;
 
-namespace Practice.Core.Examples
+namespace Practice.Core.Examples.Interop
 {
-    public class Interop
+    public class Core
     {
         [DllImport("kernel32.dll")]
         static extern int GetWindowsDirectory(StringBuilder sb, int maxChars);
