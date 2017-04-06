@@ -45,6 +45,7 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
+            // Interop.Core.AllocateUnsafeOnStack();
             // Interop.Core.DisplaySystemTime();
             // Interop.Core.DisplayWindowsDirectory();
             // Interop.Core.DisplayInteropMessageBox();

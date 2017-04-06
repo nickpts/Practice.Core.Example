@@ -8,7 +8,7 @@ using Practice.Core.Examples.Interop;
 using Practice.Core.Examples.Abstractions;
 using Share = Practice.Core.Examples.Interop.SharedMemory;
 
-namespace Practice.Core.SharedMemory
+namespace Practice.Core.SharedMemoryReaderWriter
 {
     public class Program
     {
@@ -20,16 +20,16 @@ namespace Practice.Core.SharedMemory
                 void* root = share.Root.ToPointer();
                 SharedData* data = (SharedData*)root;
 
-                data->Value = 123;
-                data->Letter = 'X';
-                data->Numbers[10] = 1.45f;
-
-                Console.WriteLine("Data written to shared memory");
-                Console.ReadLine();
-
                 Console.WriteLine("Value is " + data->Value);
                 Console.WriteLine("Letter is " + data->Letter);
                 Console.WriteLine("11th Number is " + data->Numbers[10]);
+
+                // Our turn to update values in shared memory!
+                data->Value++;
+                data->Letter = '!';
+                data->Numbers[10] = 987.5f;
+
+                Console.WriteLine("Updated shared memory");
                 Console.ReadLine();
             }
         }
