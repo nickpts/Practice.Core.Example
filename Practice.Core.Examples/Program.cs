@@ -45,7 +45,13 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-            Interop.Core.WindowHandleCallback();
+            RegularExpressions.MatchExactlyOneTime();
+            // RegularExpressions.MatchOneOrMoreTimes();
+            // RegularExpressions.MatchCharacterZeroOrMoreTimes();
+            // RegularExpressions.MatchCharacterOptional();
+            // RegularExpressions.MatchAnySingleCharacter();
+            // RegularExpressions.FindSimplePattern();
+            // Interop.Core.WindowHandleCallback();
             // Interop.DisplayWindowsDirectory();
             // Interop.DisplaySystemTime();
             // ApplicationDomain.CommunicateWithAnotherDomain();

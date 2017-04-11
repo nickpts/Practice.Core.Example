@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Practice.Core.Examples.Interop;
 using Practice.Core.Examples.Abstractions;
 using Share = Practice.Core.Examples.Interop.SharedMemory;
+using System.IO.MemoryMappedFiles;
 
 namespace Practice.Core.SharedMemoryReaderWriter
 {
@@ -14,10 +15,13 @@ namespace Practice.Core.SharedMemoryReaderWriter
     {
         public unsafe static void Main(string[] args)
         {
-            // allocates 1mb of shared memory
-            using (var share = new Share("MyShare", false, 1000000))
+            using (var mapper = MemoryMappedFile.CreateNew("MyShare", 1000000))
+            using (var accessor = mapper.CreateViewAccessor())
             {
-                void* root = share.Root.ToPointer();
+                byte* pointer = null;
+                accessor.SafeMemoryMappedViewHandle.AcquirePointer(ref pointer);
+
+                void* root = pointer;
                 SharedData* data = (SharedData*)root;
 
                 Console.WriteLine("Value is " + data->Value);

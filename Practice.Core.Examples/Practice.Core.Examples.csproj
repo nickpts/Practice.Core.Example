@@ -85,9 +85,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Patterns, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\projects\CSharp.Patterns\CSharp.Patterns\Patterns\bin\Debug\Patterns.dll</HintPath>
+    <Reference Include="Patterns">
+      <HintPath>..\..\..\projects\CSharp.Patterns\Patterns\bin\Debug\Patterns.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -129,6 +128,7 @@
     <Compile Include="Networking.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegularExpressions.cs" />
     <Compile Include="Security.cs" />
     <Compile Include="Serialization.cs" />
     <Compile Include="StringFormatExamples.cs" />
