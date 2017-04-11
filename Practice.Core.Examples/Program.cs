@@ -86,6 +86,8 @@ namespace Practice.Core.Examples
             // SomeNetworkingStuff.CookieWork();
             // Xml.Write();
 
+            // Features.LangFeatures.CSharp6();
+
             Console.ReadLine();
         }
     

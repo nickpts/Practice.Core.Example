@@ -104,7 +104,6 @@ namespace Practice.Core.Examples.Concurrency
             Action thirdSet = () => { CalculatePrimerNumbers(20000006, 10000000 / 3, 3); };
 
             Parallel.Invoke(firstSet, secondSet, thirdSet);
-
         }
 
         public static void CalculatePrimerNumbers(int start, int count, int actionNumber)
@@ -137,7 +136,6 @@ namespace Practice.Core.Examples.Concurrency
                     // will break out of the loop
                     // loopstate.Break(); 
                 }
-
             });
 
             Console.WriteLine($"Operation finished in { watch.ElapsedMilliseconds } milliSeconds");

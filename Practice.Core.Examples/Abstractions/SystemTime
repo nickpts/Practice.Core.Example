@@ -17,6 +17,6 @@ namespace Practice.Core.Examples.Abstractions
         public ushort Hour;
         public ushort Minute;
         public ushort Second;
-        public ushort Milliseconds;
+        public ushort MilliSeconds;
     }
 }

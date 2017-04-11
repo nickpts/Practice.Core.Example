@@ -20,7 +20,8 @@ namespace Practice.Core.Examples
             var testDomain = AppDomain.CreateDomain("testDomain");
             testDomain.SetData("Message", "string data");
 
-            Customer c = (Customer)testDomain.CreateInstanceAndUnwrap(typeof(Customer).Assembly.FullName,
+            Customer c = (Customer)testDomain.CreateInstanceAndUnwrap(
+                typeof(Customer).Assembly.FullName,
                 typeof(Customer).FullName);
 
             c.InvokeFromDomain();
