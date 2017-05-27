@@ -14,87 +14,19 @@ namespace Practice.Core.Examples
         /// <summary>
         /// operator "." matches any preceding or subsequent character.
         /// </summary>
-        public static void MatchAnySingleCharacter()
+        public static bool MatchNumbers()
         {
-            var result = Regex.Match("little praire in the woods", ".l.");
-            //tle
-            Print(result);
-
-            result = Regex.Match("little praire in the woods", "l.....");
-            //little
-            Print(result);
-
-            result = Regex.Match("little praire in the woods", "....s");
-            //woods
-            Print(result);
-
-            result = Regex.Match("little praire in the woods", "w...s");
-            //woods
-            Print(result);
+            return Regex.Match("abc123xyz", "123").Success
+                && Regex.Match("define " + 123 + "", "123").Success
+                && Regex.Match("var g = 123;", "123").Success;
         }
 
-        /// <summary>
-        /// A character may be matched at most once. Result will be successful if character not matched.
-        /// </summary>
-        public static void MatchCharacterOptional()
-        { 
-            var result = Regex.Match("little praire in the woods", "c?");
-            //success: true
-            //value: 
-            Print(result);
-
-            result = Regex.Match("little praire in the woods", "l?");
-            //success: true (result is matched at least once)
-            //value: 
-            Print(result);
-        }
-
-        public static void MatchCharacterZeroOrMoreTimes()
+        public static bool MatchTextWithStartAndEndConditions()
         {
-            var result = Regex.Match("little praire in the woods", "l*");
-            //success: true (result is matched at least once)
-            //value: 
-            Print(result);
+            return Regex.Match("file_record_transcript.pdf", "^(file.+).pdf$").Success
+                && Regex.Match("file_07241999.pdf", "^(file.+).pdf$").Success;
 
-            result = Regex.Match("little praire in the woods", "y*");
-            //success: true (result is matched zero times)
-            //value: 
-            Print(result);
         }
 
-        public static void MatchOneOrMoreTimes()
-        {
-            var result = Regex.Match("little praire in the woods", "y+");
-            //success: false (cannot find result)
-            //value: 
-            Print(result);
-
-            result = Regex.Match("little praire in the woods", "e+");
-            //success: true
-            //value: 
-            Print(result);
-        }
-
-        public static void MatchExactlyNTimes()
-        {
-            var result = Regex.Match("little praire in the woods", @"little{1}");
-            Print(result);
-        }
-
-        public static void MatchExactlyOneTime()
-        {
-            var result = Regex.Match("little praire in the woods", "");
-            Print(result);
-        }
-
-        public static void Print(Match result)
-        {
-            foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(result))
-            {
-                string name = descriptor.Name;
-                object value = descriptor.GetValue(result);
-                Console.WriteLine("{0}={1}", name, value);
-            }
-        }
     }
 }

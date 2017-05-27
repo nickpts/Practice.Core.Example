@@ -45,7 +45,8 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-            RegularExpressions.MatchExactlyOneTime();
+            Console.Write(RegularExpressions.MatchTextWithStartAndEndConditions());
+            // Console.WriteLine(RegularExpressions.MatchNumbers());
             // RegularExpressions.MatchOneOrMoreTimes();
             // RegularExpressions.MatchCharacterZeroOrMoreTimes();
             // RegularExpressions.MatchCharacterOptional();
