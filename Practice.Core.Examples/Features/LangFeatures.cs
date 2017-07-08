@@ -64,6 +64,22 @@ namespace Practice.Core.Examples.Features
             set => TestProperty = value;
         }
 
+        // fluid out variables --  
+        private static void CallTestOutMethod()
+        {
+            TestOutMethod(out int inputX, out int inputY);
+
+            Console.WriteLine(inputX); // 1;
+            Console.WriteLine(inputY); // 2;
+        }
+
+        private static void CallTestOutMethodWithDiscard()
+        {
+            TestOutMethod(out int inputX, out _);
+
+            Console.WriteLine(inputX); // 1;
+        }
+
         // expression-bodied method with throw
         public string TestThrowMethod() => throw new NotImplementedException();
 
@@ -72,15 +88,45 @@ namespace Practice.Core.Examples.Features
         {
             return testInput.Length > 0 ? testInput : throw new InvalidOperationException();
         }
+
+        // switch statement with pattern
+        public static void TestSwithWithPatterns(object o)
+        {
+            switch (o)
+            {
+                case Stock s:
+                    Console.WriteLine("It's a stock!");
+                    break;
+                case Wish w when (w.Name == "test"):
+                    Console.WriteLine($"It's a wish with priority: { w.Priority }");
+                    break;
+                default:
+                    break;
+                case null:
+                    throw new ArgumentNullException(nameof(o));
+            }
+        }
+
+        // method calling local method
+        public static void PrintOutVariable()
+        {
+            Print("calling local function!");
+
+            void Print(string test)
+            {
+                Console.WriteLine(test);
+            }
+        }
         
 
         #endregion
 
         #region Private implementation
 
-        private static void TestOutMethod(int x, int y)
+        private static void TestOutMethod(out int x, out int y)
         {
-
+            x = 1;
+            y = 2;
         }
 
         #endregion
