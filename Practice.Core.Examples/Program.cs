@@ -3,7 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using System.Timers;
+using System.Diagnostics;
+using System.Diagnostics.Contracts;
+using System.Threading;
+using System.IO.Compression;
+using System.Net;
+using System.Net.Http;
 
+using Practice.Core.Examples.Abstractions;
+using Practice.Core.Examples.Features;
 using Practice.Core.Examples.Comparers;
 using Practice.Core.Examples;
 
@@ -27,10 +36,12 @@ namespace Practice.Core.Examples
     {
         static void WriteProgressToConsole(int percentComplete) => Console.WriteLine(percentComplete);
         static void PlayAlertSound(int play) => Console.Beep();
-
+        
         private static void Main(string[] args)
         {
-            Console.Write(RegularExpressions.MatchTextWithStartAndEndConditions());
+            Wish w = new Wish("test", 1);
+            LangFeatures.TestSwithWithPatterns(w);
+            // Console.Write(RegularExpressions.MatchTextWithStartAndEndConditions());
             // Console.WriteLine(RegularExpressions.MatchNumbers());
             // RegularExpressions.MatchOneOrMoreTimes();
             // RegularExpressions.MatchCharacterZeroOrMoreTimes();
