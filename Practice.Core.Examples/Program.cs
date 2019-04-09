@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Linq;
 using System.Timers;
 using System.Diagnostics;
@@ -22,8 +14,7 @@ using System.Net.Http;
 using Practice.Core.Examples.Abstractions;
 using Practice.Core.Examples.Features;
 using Practice.Core.Examples.Comparers;
-using Practice.Core.Examples.Concurrency;
-using Practice.Core.Examples.Collections;
+using Practice.Core.Examples;
 
 namespace Practice.Core.Examples
 {

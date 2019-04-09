@@ -73,7 +73,6 @@ namespace Practice.Core.Examples.Concurrency
                                 where Enumerable.Range(2, (int)Math.Sqrt(n)).All(i => n % i > 0)
                                 select n;
 
-
             var source = new CancellationTokenSource();
             var token = source.Token;
 
@@ -87,7 +86,6 @@ namespace Practice.Core.Examples.Concurrency
                 {
                     Console.WriteLine($"Query cancelled: { e.Message }");
                 }
-
             });
 
             workerThread.Start();
@@ -217,6 +215,7 @@ namespace Practice.Core.Examples.Concurrency
             }).ContinueWith(p => 
             {
                 var ex = p.Exception.Flatten(); // will return 4 exceptions
+
 
                 p.Exception.Flatten().Handle(aex =>
                 {
