@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace Practice.Core.Examples
 {
-    public class Diagnostic
+    public class Diagnostics
     {
         private System.Timers.Timer timer;
 
-        private Diagnostic()
+        private Diagnostics()
         {
             timer = new System.Timers.Timer() { Interval = 1000 };
             timer.Elapsed += timerElapsed;
@@ -23,7 +21,7 @@ namespace Practice.Core.Examples
 
         void timerElapsed(object sender, ElapsedEventArgs e) { }
 
-        public void Test()
+        public static void Test()
         {
             var sb = new StringBuilder("this is a test");
             var weak = new WeakReference(sb);

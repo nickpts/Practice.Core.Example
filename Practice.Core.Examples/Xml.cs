@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 
 using Practice.Core.Examples.Abstractions;
 
@@ -26,53 +27,44 @@ namespace Practice.Core.Examples
 
         public static void Test()
         {
-            //var bench = new XElement("bench",
-            //    new XElement("toolbox",
-            //        new XElement("handtool", "Hammer"),
-            //        new XElement("handtool", "Rasp")
-            //    ),
-            //    new XElement("toolbox",
-            //        new XElement("handtool", "Saw"),
-            //        new XElement("powerool", "Nailgun")
-            //    ),
-            //    new XComment("Be careful with the naigul")
-            //    );
+            var bench = new XElement("bench",
+                new XElement("toolbox",
+                    new XElement("handtool", "Hammer"),
+                    new XElement("handtool", "Rasp")
+                ),
+                new XElement("toolbox",
+                    new XElement("handtool", "Saw"),
+                    new XElement("powerool", "Nailgun")
+                ),
+                new XComment("Be careful with the naigul")
+                );
 
-            //IEnumerable<string> tools = from tool in bench.Elements("toolbox").Elements("handtool")
-            //                            select tool.Value.ToUpper();
+            IEnumerable<string> tools = from tool in bench.Elements("toolbox").Elements("handtool")
+                                        select tool.Value.ToUpper();
+
+            var fluenttools = bench.Elements("toolbox").Elements("handtool").Select(x => x.Value.ToUpper());
 
             //HAMMER, RASP, SAW
 
-            //string hammer = bench.Element("toolbox").Element("handtool").Value;
-            //// hammer
+            string hammer = bench.Element("toolbox").Element("handtool").Value;
+            // hammer
 
-            //List<string> handtools = bench.Descendants("handtool").Select(c => c.Value).ToList();
-            ////hammer, rasp, saw
+            List<string> handtools = bench.Descendants("handtool").Select(c => c.Value).ToList();
+            //hammer, rasp, saw
 
-            //foreach (XElement e in bench.Elements()) Console.WriteLine(e.Name + "=" + e.Value);
+            foreach (XElement ex in bench.Elements())
+            {
+                Console.WriteLine(ex.Name + "=" + ex.Value);
+            }
 
-            //XElement e = new XElement("now", DateTime.Now);
-            //DateTime dt = (DateTime)e;
-            // toolbox=HammerRasp
-            // toolbox=SawNailgun
-            //int[] values = new int[] { 1, 2, 3, 4 };
-            //Util.TransformAll(values, new Squarer());
+            XElement e = new XElement("now", DateTime.Now);
+            DateTime dt = (DateTime)e;
 
-            //ProgressReporter pMonitor = PlayAlertSound;
-            //ProgressReporter p = x => Console.WriteLine("test");
-            //pMonitor += WriteProgressToConsole;
-            //Util.DoWork(pMonitor);
-
-            //Stock s = new Examples.Stock("huh?");
-            //s.Price = 4; // will print 4 to console
-            //Func<string, string, int> result = (s1, s2) => s1.Length + s2.Length;
-            //int length = result("test", "test"); // length is 8
         }
 
         public static void OtherXmlApiTest()
         {
-            //var settings = new XmlReaderSettings();
-            //settings.IgnoreWhitespace = true;
+            var settings = new XmlReaderSettings();
 
             //using (XmlReader reader = XmlReader.Create("customer.xml", settings))
             //while (reader.Read())
@@ -92,16 +84,16 @@ namespace Practice.Core.Examples
             // * EndElement
             // */
 
-            var settings = new XmlWriterSettings();
-            settings.Indent = true;
+            //var settings = new XmlWriterSettings();
+            //settings.Indent = true;
 
-            using (XmlWriter writer = XmlWriter.Create(@"C:\foo.xml", settings))
-            {
-                writer.WriteStartElement("customer");
-                writer.WriteElementString("firstname", "Jim");
-                writer.WriteElementString("lastname", "Bo");
-                writer.WriteEndElement();
-            }
+            //using (XmlWriter writer = XmlWriter.Create(@"C:\foo.xml", settings))
+            //{
+            //    writer.WriteStartElement("customer");
+            //    writer.WriteElementString("firstname", "Jim");
+            //    writer.WriteElementString("lastname", "Bo");
+            //    writer.WriteEndElement();
+            //}
 
             /* <?xml version="1.0" encoding="utf-8" ?>
              * <customer>

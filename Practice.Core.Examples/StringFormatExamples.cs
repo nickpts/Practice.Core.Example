@@ -19,6 +19,9 @@ namespace Practice.Core.Examples
             int currency = 9;
             string cString = currency.ToString("C2");
 
+            double value = 2.345;
+            string cValue = value.ToString(".##");
+
             var date = DateTime.Now;
             string sDate = date.ToString("u");
         }

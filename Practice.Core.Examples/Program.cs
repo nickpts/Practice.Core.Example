@@ -46,10 +46,12 @@ namespace Practice.Core.Examples
         static void WriteProgressToConsole(int percentComplete) => Console.WriteLine(percentComplete);
         static void PlayAlertSound(int play) => Console.Beep();
         
+
         private static void Main(string[] args)
         {
-            Wish w = new Wish("test", 1);
-            LangFeatures.TestSwithWithPatterns(w);
+
+            //Wish w = new Wish("test", 1);
+            //LangFeatures.TestSwithWithPatterns(w);
             // Console.Write(RegularExpressions.MatchTextWithStartAndEndConditions());
             // Console.WriteLine(RegularExpressions.MatchNumbers());
             // RegularExpressions.MatchOneOrMoreTimes();
@@ -96,7 +98,8 @@ namespace Practice.Core.Examples
 
             // Serialization.Test();
             // SomeNetworkingStuff.CookieWork();
-            // Xml.Write();
+            // Xml.Test();
+            Diagnostics.Test();
 
             // Features.LangFeatures.CSharp6();
 
