@@ -28,6 +28,25 @@ namespace Practice.Core.Examples.Concurrency
             ThreadPool.QueueUserWorkItem(new WaitCallback(a => GenericTestMethod("test")));
         }
 
+
+        public static void DemonstrateManualResetEvent()
+        {
+            var signal = new ManualResetEvent(false);
+
+            var t = new Thread(() => 
+            {
+                Console.WriteLine("Waiting for signal...");
+                signal.WaitOne();
+                signal.Dispose();
+                Console.WriteLine("Signalled");
+            });
+
+            t.Start();
+            Thread.Sleep(2000);
+
+            signal.Set();
+        }
+
         public static void WaitExample()
         {
             longCpuBoundThreadWithHandle.Start();
@@ -42,15 +61,22 @@ namespace Practice.Core.Examples.Concurrency
             List<string> longfileInput = new List<string>();
             List<string> shortFileInput = new List<string>();
 
+            shortCpuBoundThread.Name = "ShortCpuBoundThread";
+            longCpuBoundThread.Name = "LongCpuBoundThread";
+
             Thread longIoBoundThread = new Thread(() =>
             {
                 longfileInput = ReadFile(@"C:\Users\Nick\Dev\docs\asyncioexample.txt");
             });
 
+            longIoBoundThread.Name = "LongIoBoundThread";
+
             Thread shortIoBoundThread = new Thread(() =>
             {
                 shortFileInput = ReadFile(@"C:\Users\Nick\Dev\docs\asyncioexample2.txt");
             });
+
+            shortIoBoundThread.Name = "ShortIoBoundThread";
 
             longCpuBoundThread.Start();
             shortCpuBoundThread.Start();
@@ -116,7 +142,7 @@ namespace Practice.Core.Examples.Concurrency
 
         public static List<string> ReadFile(string fileUri)
         {
-            List<string> lines = new List<string>(); https://go.microsoft.com/fwlink/p/?LinkId=248256
+            List<string> lines = new List<string>();
 
             using (StreamReader reader = File.OpenText(fileUri))
             {

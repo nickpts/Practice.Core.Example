@@ -24,6 +24,8 @@ namespace Practice.Core.Examples.Concurrency
 
             IEnumerable<int> numbers = Enumerable.Range(3, 10000000 - 3);
 
+            Console.WriteLine("Starting parallelism with all cores");
+
             var parallelQuery = from n in numbers.AsParallel()
                                 where Enumerable.Range(2, (int)Math.Sqrt(n)).All(i => n % i > 0)
                                 select n;
@@ -40,13 +42,12 @@ namespace Practice.Core.Examples.Concurrency
             int[] inefficientPrimes = parallelQuery.WithDegreeOfParallelism(2).ToArray();
             Console.WriteLine($"Elapsed time in seconds: { watch.Elapsed.Seconds }");
 
+            Console.ReadLine();
         }
 
-        public static List<string> FindWordsParallel()
+        public static void FindWordsParallel()
         {
-            HashSet<string> hashWords = new HashSet<string>(
-                File.ReadAllLines(millionLineFilePath),
-                StringComparer.InvariantCultureIgnoreCase);
+            HashSet<string> hashWords = new HashSet<string>(File.ReadAllLines(millionLineFilePath), StringComparer.InvariantCultureIgnoreCase);
 
             List<string> megaSet = hashWords.ToList();
 
@@ -55,11 +56,10 @@ namespace Practice.Core.Examples.Concurrency
 
             var watch = Stopwatch.StartNew();
             Console.WriteLine("Starting operation...");
-            var filteredWords = megaSet.Where(w => !hashWords.Contains(w)).OrderBy(w => w).ToList();
+            megaSet.Where(w => !hashWords.Contains(w)).OrderBy(w => w).AsParallel().ToList();
 
-            Console.WriteLine($"Operation took {watch.Elapsed.Seconds} seconds");
-
-            return filteredWords;
+            Console.WriteLine($"PLINQ operation took {watch.Elapsed.Milliseconds} milliseconds");
+            Console.ReadLine();
         }
 
         public static void ParallelPrimeNumbersWithCancellation()

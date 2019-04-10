@@ -15,6 +15,7 @@ using Practice.Core.Examples.Abstractions;
 using Practice.Core.Examples.Features;
 using Practice.Core.Examples.Comparers;
 using Practice.Core.Examples;
+using Practice.Core.Examples.Concurrency;
 
 namespace Practice.Core.Examples
 {
@@ -40,7 +41,6 @@ namespace Practice.Core.Examples
 
         private static void Main(string[] args)
         {
-
             //Wish w = new Wish("test", 1);
             //LangFeatures.TestSwithWithPatterns(w);
             // Console.Write(RegularExpressions.MatchTextWithStartAndEndConditions());
@@ -65,7 +65,7 @@ namespace Practice.Core.Examples
             // CParallel.TaskWithChild();
             // CParallel.TaskFactoryAsyncStateExample();
             // CParallel.ParallelKeyGeneration();
-            // CParallel.ParallelPrimeNumberInvokation();
+             CParallel.ParallelPrimeNumberInvokation();
             // CParallel.ParallelPrimeNumbersWithCancellation();
             // CParallel.FindWordsParallel();
             // CParallel.ParallelPrimeNumbers();
@@ -74,11 +74,12 @@ namespace Practice.Core.Examples
             // AdvancedThreading.ReleaseMultipleThreadsWithWaitEventHandle();
             // AdvancedThreading.ThreadsWaitingOnAutoResetEvent();
             // AdvancedThreading.ReaderWriterLockSyncAccess();
-            // AdvancedThreading.SemaphoreSixThreads();
+            // AdvancedThreading.ReaderWriterLockSyncAccess();
             // AdvancedThreading.DeadlockExample();
             // AdvancedThreading.UseMutexToSynchronizeAccess();
             // BasicThreading.WaitExample();
             // BasicThreading.CPUandIOBoundOperationsTest();
+            // BasicThreading.DemonstrateManualResetEvent();
             // BasicThreading.BasicTheadTest();
             // Concurrency.Asynchrony.TaskWithSimpleCancellation();
             // Asynchrony.TryWithTimeout();
@@ -86,11 +87,11 @@ namespace Practice.Core.Examples
             // Asynchrony.TaskCombinationsAsync();
             // Asynchrony.ReadFileAsyncCancellable();
             // Asynchrony.LoopExampleAsync();
-
             // Serialization.Test();
             // SomeNetworkingStuff.CookieWork();
             // Xml.Test();
             Diagnostics.Test();
+            
 
             // Features.LangFeatures.CSharp6();
 
