@@ -19,8 +19,7 @@ namespace Practice.Core.Examples
             _responseGenerator = responseGenerator;
         }
 
-        protected override Task<HttpResponseMessage> SendAsync
-        (HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             var response = _responseGenerator(request);
@@ -82,10 +81,10 @@ namespace Practice.Core.Examples
             string testUrl = "http://www.samplewebpage.com/EchoPost.aspx";
             var testClient = new HttpClient();
             var col = new Dictionary<string, string>
-        {
-            { "Name", "Nick Patsaris" },
-            { "Company", "A cool company" }
-        };
+            {
+                { "Name", "Nick Patsaris" },
+                { "Company", "A cool company" }
+            };
 
             var values = new FormUrlEncodedContent(col);
             var response = await client.PostAsync(testUrl, values);

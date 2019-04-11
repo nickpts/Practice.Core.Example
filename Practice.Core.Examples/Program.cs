@@ -65,7 +65,7 @@ namespace Practice.Core.Examples
             // CParallel.TaskWithChild();
             // CParallel.TaskFactoryAsyncStateExample();
             // CParallel.ParallelKeyGeneration();
-             CParallel.ParallelPrimeNumberInvokation();
+            // CParallel.ParallelPrimeNumberInvokation();
             // CParallel.ParallelPrimeNumbersWithCancellation();
             // CParallel.FindWordsParallel();
             // CParallel.ParallelPrimeNumbers();
@@ -87,7 +87,14 @@ namespace Practice.Core.Examples
             // Asynchrony.TaskCombinationsAsync();
             // Asynchrony.ReadFileAsyncCancellable();
             // Asynchrony.LoopExampleAsync();
-            // Serialization.Test();
+
+            #region Serialization
+            // Serialization.DataContractSerializer();
+            // Serialization.DataContractSerializerBinaryFormatted();
+            // Serialization.NetDataContractSerializer();
+            Serialization.BinarySerialization();
+            #endregion
+
             // SomeNetworkingStuff.CookieWork();
             // Xml.Test();
             Diagnostics.Test();
@@ -100,31 +107,6 @@ namespace Practice.Core.Examples
 
     }
 }
-
-#region delegates/events
-
-//public class Util
-//{
-//    public static void DoWork(ProgressReporter monitor)
-//    {
-//        for (int i = 0; i < 10; i++)
-//        {
-//            monitor(i * 10);
-//            System.Threading.Thread.Sleep(100);
-//        }
-//    }
-
-//    public static void TransformAll(int[] values, IMath transformer)
-//    {
-//        for (int i = 0; i < values.Length; i++)
-//        {
-//            values[i] = transformer.Square(values[i]);
-//        }
-//    }
-//}
-
-
-#endregion
 
 public class Test
 {

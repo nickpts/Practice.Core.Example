@@ -13,9 +13,9 @@ namespace Practice.Core.Examples.Concurrency
     public class CParallel
     {
         //massive file with 1,500,000 words
-        private static readonly string millionLineFilePath = @"C:\Users\Nick\Dev\docs\asyncioexample.txt";
-        private static readonly string halfMillionLineFilePath = @"C:\Users\user\Downloads\test.txt";
-        private static readonly string smallerFilePath = @"C:\Users\Nick\Dev\docs\asyncioexample2.txt";
+        public static readonly string millionLineFilePath = @"C:\Users\Nick\Dev\docs\asyncioexample.txt";
+        public static readonly string halfMillionLineFilePath = @"C:\Users\user\Downloads\test.txt";
+        public static readonly string smallerFilePath = @"C:\Users\Nick\Dev\docs\asyncioexample2.txt";
 
         public static void ParallelPrimeNumbers()
         {
