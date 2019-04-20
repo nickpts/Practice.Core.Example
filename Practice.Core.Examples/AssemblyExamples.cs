@@ -16,10 +16,25 @@ namespace Practice.Core.Examples
 {
     public class AssemblyExamples
     {
+
+        #region Methods
+
+        public static void StaticMethods()
+        {
+            Console.WriteLine(Assembly.GetExecutingAssembly()); 
+            Console.WriteLine(Assembly.GetCallingAssembly()); 
+            Console.WriteLine(Assembly.GetEntryAssembly());
+           
+            Console.ReadLine();
+        }
+
+        #endregion
+
         public void Test()
         {
             Assembly a = typeof(Program).Assembly;
 
+            
             Assembly entry = Assembly.GetEntryAssembly();
 
             using (Stream s = entry.GetManifestResourceStream("TestProject.data.xml"))

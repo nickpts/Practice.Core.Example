@@ -92,13 +92,16 @@ namespace Practice.Core.Examples
             // Serialization.DataContractSerializer();
             // Serialization.DataContractSerializerBinaryFormatted();
             // Serialization.NetDataContractSerializer();
-            Serialization.BinarySerialization();
+            //Serialization.BinarySerialization();
             #endregion
 
             // SomeNetworkingStuff.CookieWork();
             // Xml.Test();
             Diagnostics.Test();
-            
+
+            #region Assemblies
+            AssemblyExamples.StaticMethods();
+            #endregion Assemblies
 
             // Features.LangFeatures.CSharp6();
 
