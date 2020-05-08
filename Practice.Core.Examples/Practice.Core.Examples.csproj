@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Practice.Core.Examples</RootNamespace>
     <AssemblyName>Practice.Core.Examples</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -120,6 +120,7 @@
     <Compile Include="Concurrency\BasicThreading.cs" />
     <Compile Include="Concurrency\Asynchrony.cs" />
     <Compile Include="Concurrency\CParallel.cs" />
+    <Compile Include="Delegates.cs" />
     <Compile Include="Diagnostics.cs" />
     <Compile Include="Features\LangFeatures.cs" />
     <Compile Include="Interop\Core.cs" />

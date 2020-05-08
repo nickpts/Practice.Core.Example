@@ -21,7 +21,40 @@ namespace Practice.Core.Examples.Concurrency
         private static Thread longCpuBoundThread = new Thread(IterateOverEnormousNumberSet);
         private static Thread shortCpuBoundThread = new Thread(IterateOverEnormousNumberSet);
         private static Thread longCpuBoundThreadWithHandle = new Thread(IterateOverEnormousNumberSetWithWait);
-        
+
+        /// <summary>
+        /// Read two files from the disk at the same time
+        /// </summary>
+        public static void BasicTheadTest()
+        {
+	        List<string> longfileInput = new List<string>();
+	        List<string> shortFileInput = new List<string>();
+
+	        Thread longActionThread = new Thread(() =>
+	        {
+		        longfileInput = ReadFile(@"C:\Users\Nick\Dev\docs\asyncioexample.txt");
+	        });
+
+	        longActionThread.Name = "Long action thread";
+
+	        Thread shortActionThread = new Thread(() =>
+	        {
+		        shortFileInput = ReadFile(@"C:\Users\Nick\Dev\docs\asyncioexample2.txt");
+	        });
+
+	        shortActionThread.Name = "Short action thread";
+
+	        longActionThread.Start();
+	        shortActionThread.Start();
+
+	        // block the main thread
+	        // by the time control is returned both threads will have returned
+	        Thread.Sleep(10000);
+
+	        int count = longfileInput.Count();
+	        int tCount = shortFileInput.Count();
+        }
+
         public void ThreadPoolStuff()
         {
             string testValue = string.Empty;
@@ -91,34 +124,7 @@ namespace Practice.Core.Examples.Concurrency
             int tCount = shortFileInput.Count();
 
         }
-        /// <summary>
-        /// Read two files from the disk at the same time
-        /// </summary>
-        public static void BasicTheadTest()
-        {
-            List<string> longfileInput = new List<string>();
-            List<string> shortFileInput = new List<string>();
 
-            Thread longActionThread = new Thread(() =>
-            {
-                longfileInput = ReadFile(@"C:\Users\Nick\Dev\docs\asyncioexample.txt");
-            });
-
-            Thread shortActionThread = new Thread(() => 
-            {
-                shortFileInput = ReadFile(@"C:\Users\Nick\Dev\docs\asyncioexample2.txt");
-            });
-
-            longActionThread.Start();
-            shortActionThread.Start();
-
-            // block the main thread
-            // by the time control is returned both threads will have returned
-            Thread.Sleep(10000);
-
-            int count = longfileInput.Count();
-            int tCount = shortFileInput.Count();
-        }
 
         public static void TestThreadParameters()
         {
@@ -140,7 +146,7 @@ namespace Practice.Core.Examples.Concurrency
             Console.WriteLine(message);
         }
 
-        public static List<string> ReadFile(string fileUri)
+        private static List<string> ReadFile(string fileUri)
         {
             List<string> lines = new List<string>();
 
@@ -156,7 +162,7 @@ namespace Practice.Core.Examples.Concurrency
             return lines;
         }
         
-        public static void IterateOverEnormousNumberSet()
+        private static void IterateOverEnormousNumberSet()
         {
             for(double d = 0; d < 100000; d++)
             {
@@ -164,7 +170,7 @@ namespace Practice.Core.Examples.Concurrency
             }
         }
 
-        public static void IterateOverReasonablySmallNumberSet()
+        private static void IterateOverReasonablySmallNumberSet()
         {
             for (int i = 0; i < 500000; i++)
             {
@@ -172,7 +178,7 @@ namespace Practice.Core.Examples.Concurrency
             }
         }
 
-        public static void IterateOverEnormousNumberSetWithWait()
+        private static void IterateOverEnormousNumberSetWithWait()
         {
             for (double d = 0; d < 100000; d++)
             {
@@ -185,7 +191,7 @@ namespace Practice.Core.Examples.Concurrency
             }
         }
 
-        public static void GenericTestMethod(string text)
+        private static void GenericTestMethod(string text)
         {
             // do nothing
         }

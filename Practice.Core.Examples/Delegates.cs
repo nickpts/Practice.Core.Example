@@ -24,8 +24,9 @@ namespace Practice.Core.Examples
 
 		public void RunFunc()
 		{
-
 			Func<int, int, int> sum = MethodThatAdds;
+
+			Func<int, int, int> anotherSum = (x, y) => x + y;
 
 			int result = sum.Invoke(1, 2);
 
@@ -37,7 +38,12 @@ namespace Practice.Core.Examples
 
 			int rand = getRandomNumber.Invoke();
 
+			Func<int> getRandomNumberShort = () => new Random().Next(1, 100);
+		}
 
+		public int MethodThatAdds(int x, int y)
+		{
+			return x + y;
 		}
 
 		public void MethodThatPrintsToConsole(int param)
@@ -45,9 +51,6 @@ namespace Practice.Core.Examples
 			Console.WriteLine("Write {0}", param);
 		}
 
-		public int MethodThatAdds(int x, int y)
-		{
-			return x + y;
-		}
+
 	}
 }

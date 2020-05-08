@@ -6,11 +6,12 @@ using System.Xml.Linq;
 using System.Timers;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
+using System.Globalization;
 using System.Threading;
 using System.IO.Compression;
 using System.Net;
 using System.Net.Http;
-
+using System.Text;
 using Practice.Core.Examples.Abstractions;
 using Practice.Core.Examples.Features;
 using Practice.Core.Examples.Comparers;
@@ -37,67 +38,111 @@ namespace Practice.Core.Examples
     {
         static void WriteProgressToConsole(int percentComplete) => Console.WriteLine(percentComplete);
         static void PlayAlertSound(int play) => Console.Beep();
-        
+
+        public class DateTransform
+        {
+	        public static List<string> ChangeDateFormat(List<string> dates)
+	        {
+		        var newDates = new List<string>();
+
+		        foreach (var date in dates)
+		        {
+			        string constructed = FormatDate(date);
+					newDates.Add(constructed);
+		        }
+
+		        return newDates;
+
+	        }
+
+	        public static string FormatDate(string stringDate)
+	        {
+		        var date = new DateTime();
+
+		        if (stringDate.Contains("-"))
+		        {
+			        date = DateTime.ParseExact(stringDate, "MM-dd-yyyy", CultureInfo.CurrentCulture);
+		        }
+		        else if (stringDate.Contains("/"))
+		        {
+			        date = DateTime.Parse(stringDate);
+		        }
+		        else
+		        {
+			        date = DateTime.ParseExact(stringDate, "yyyyMMdd", CultureInfo.CurrentCulture);
+				}
+
+		        var builder = new StringBuilder();
+		        builder.Append(date.Year);
+		        builder.Append(date.Month);
+		        builder.Append(date.Day);
+
+				return builder.ToString();
+	        }
+        }
 
         private static void Main(string[] args)
         {
-            //Wish w = new Wish("test", 1);
-            //LangFeatures.TestSwithWithPatterns(w);
-            // Console.Write(RegularExpressions.MatchTextWithStartAndEndConditions());
-            // Console.WriteLine(RegularExpressions.MatchNumbers());
-            // RegularExpressions.MatchOneOrMoreTimes();
-            // RegularExpressions.MatchCharacterZeroOrMoreTimes();
-            // RegularExpressions.MatchCharacterOptional();
-            // RegularExpressions.MatchAnySingleCharacter();
-            // RegularExpressions.FindSimplePattern();
-            // Interop.Core.WindowHandleCallback();
-            // Interop.DisplayWindowsDirectory();
-            // Interop.DisplaySystemTime();
-            // ApplicationDomain.CommunicateWithAnotherDomain();
-            // ApplicationDomain.PassDataBetweenDomains();
-            // ApplicationDomain.MultipleThreadsLogin();
-            // ApplicationDomain.TestDomain();
-            // Concurrent.ParallelAddingToConcurrentBag();
-            // Concurrent.ConcurrentDictionaryPerformance();
-            // Concurrent.StandardDictionaryPerformance();
-            // CParallel.GetExceptionsFromChildTasks();
-            // string s = CParallel.TaskCombinedString();
-            // CParallel.TaskWithChild();
-            // CParallel.TaskFactoryAsyncStateExample();
-            // CParallel.ParallelKeyGeneration();
-            // CParallel.ParallelPrimeNumberInvokation();
-            // CParallel.ParallelPrimeNumbersWithCancellation();
-            // CParallel.FindWordsParallel();
-            // CParallel.ParallelPrimeNumbers();
-            // AdvancedThreading.BarrierExampleToSynchronizeThreeThreads();
-            // AdvancedThreading.ReleaseThreadsWithCountdownEvent();
-            // AdvancedThreading.ReleaseMultipleThreadsWithWaitEventHandle();
-            // AdvancedThreading.ThreadsWaitingOnAutoResetEvent();
-            // AdvancedThreading.ReaderWriterLockSyncAccess();
-            // AdvancedThreading.ReaderWriterLockSyncAccess();
-            // AdvancedThreading.DeadlockExample();
-            // AdvancedThreading.UseMutexToSynchronizeAccess();
-            // BasicThreading.WaitExample();
-            // BasicThreading.CPUandIOBoundOperationsTest();
-            // BasicThreading.DemonstrateManualResetEvent();
-            // BasicThreading.BasicTheadTest();
-            // Concurrency.Asynchrony.TaskWithSimpleCancellation();
-            // Asynchrony.TryWithTimeout();
-            // Asynchrony.TaskCombinationsSyncInt();
-            // Asynchrony.TaskCombinationsAsync();
-            // Asynchrony.ReadFileAsyncCancellable();
-            // Asynchrony.LoopExampleAsync();
+	        var input = new List<string> { "2010/03/30", "15/12/2016", "11-15-2012", "20130720" };
+	        DateTransform.ChangeDateFormat(input).ForEach(Console.WriteLine);
 
-            #region Serialization
-            // Serialization.DataContractSerializer();
-            // Serialization.DataContractSerializerBinaryFormatted();
-            // Serialization.NetDataContractSerializer();
-            //Serialization.BinarySerialization();
-            #endregion
+			//Wish w = new Wish("test", 1);
+			//LangFeatures.TestSwithWithPatterns(w);
+			// Console.Write(RegularExpressions.MatchTextWithStartAndEndConditions());
+			// Console.WriteLine(RegularExpressions.MatchNumbers());
+			// RegularExpressions.MatchOneOrMoreTimes();
+			// RegularExpressions.MatchCharacterZeroOrMoreTimes();
+			// RegularExpressions.MatchCharacterOptional();
+			// RegularExpressions.MatchAnySingleCharacter();
+			// RegularExpressions.FindSimplePattern();
+			// Interop.Core.WindowHandleCallback();
+			// Interop.DisplayWindowsDirectory();
+			// Interop.DisplaySystemTime();
+			// ApplicationDomain.CommunicateWithAnotherDomain();
+			// ApplicationDomain.PassDataBetweenDomains();
+			// ApplicationDomain.MultipleThreadsLogin();
+			// ApplicationDomain.TestDomain();
+			// Concurrent.ParallelAddingToConcurrentBag();
+			// Concurrent.ConcurrentDictionaryPerformance();
+			// Concurrent.StandardDictionaryPerformance();
+			// CParallel.GetExceptionsFromChildTasks();
+			// string s = CParallel.TaskCombinedString();
+			// CParallel.TaskWithChild();
+			// CParallel.TaskFactoryAsyncStateExample();
+			// CParallel.ParallelKeyGeneration();
+			// CParallel.ParallelPrimeNumberInvokation();
+			// CParallel.ParallelPrimeNumbersWithCancellation();
+			// CParallel.FindWordsParallel();
+			// CParallel.ParallelPrimeNumbers();
+			// AdvancedThreading.BarrierExampleToSynchronizeThreeThreads();
+			// AdvancedThreading.ReleaseThreadsWithCountdownEvent();
+			// AdvancedThreading.ReleaseMultipleThreadsWithWaitEventHandle();
+			// AdvancedThreading.ThreadsWaitingOnAutoResetEvent();
+			// AdvancedThreading.ReaderWriterLockSyncAccess();
+			// AdvancedThreading.ReaderWriterLockSyncAccess();
+			// AdvancedThreading.DeadlockExample();
+			// AdvancedThreading.UseMutexToSynchronizeAccess();
+			 //BasicThreading.WaitExample();
+			// BasicThreading.CPUandIOBoundOperationsTest();
+			// BasicThreading.DemonstrateManualResetEvent();
+			// BasicThreading.BasicTheadTest();
+			// Concurrency.Asynchrony.TaskWithSimpleCancellation();
+			// Asynchrony.TryWithTimeout();
+			// Asynchrony.TaskCombinationsSyncInt();
+			// Asynchrony.TaskCombinationsAsync();
+			// Asynchrony.ReadFileAsyncCancellable();
+			// Asynchrony.LoopExampleAsync();
 
-            // SomeNetworkingStuff.CookieWork();
-            // Xml.Test();
-            Diagnostics.Test();
+			#region Serialization
+			// Serialization.DataContractSerializer();
+			// Serialization.DataContractSerializerBinaryFormatted();
+			// Serialization.NetDataContractSerializer();
+			//Serialization.BinarySerialization();
+			#endregion
+
+			// SomeNetworkingStuff.CookieWork();
+			// Xml.Test();
+			Diagnostics.Test();
 
             #region Assemblies
             AssemblyExamples.StaticMethods();
@@ -193,7 +238,13 @@ public class Test
         var e1 = new XElement("test", "Hello");
         e1.Add("World");
         var e2 = new XElement("test", "Hello", "World");
-        //both e1 and 2 end up with just one child XText element whose value is HelloWorld.
+		//both e1 and 2 end up with just one child XText element whose value is HelloWorld.
+
+
+		string[] someArray = new string[] { };
+		string[] someOtherArray = new string[] { };
+
+		//var thirdarray = someArray.(someOtherArray);
     }
 }
 
